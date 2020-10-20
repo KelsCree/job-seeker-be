@@ -5,7 +5,7 @@ class CreateReccomendations < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :number
       t.string :relationship
-      t.references :User, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end

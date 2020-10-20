@@ -18,20 +18,20 @@ ActiveRecord::Schema.define(version: 2020_10_20_184722) do
     t.string "description"
     t.string "url"
     t.string "status"
-    t.integer "User_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["User_id"], name: "index_applications_on_User_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
   end
 
   create_table "interviews", force: :cascade do |t|
     t.date "date"
     t.time "time"
     t.string "location"
-    t.integer "Application_id", null: false
+    t.integer "application_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["Application_id"], name: "index_interviews_on_Application_id"
+    t.index ["application_id"], name: "index_interviews_on_application_id"
   end
 
   create_table "reccomendations", force: :cascade do |t|
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(version: 2020_10_20_184722) do
     t.string "email"
     t.string "number"
     t.string "relationship"
-    t.integer "User_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["User_id"], name: "index_reccomendations_on_User_id"
+    t.index ["user_id"], name: "index_reccomendations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_10_20_184722) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "applications", "Users"
-  add_foreign_key "interviews", "Applications"
-  add_foreign_key "reccomendations", "Users"
+  add_foreign_key "applications", "users"
+  add_foreign_key "interviews", "applications"
+  add_foreign_key "reccomendations", "users"
 end

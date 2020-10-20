@@ -4,7 +4,7 @@ class CreateInterviews < ActiveRecord::Migration[6.0]
       t.date :date
       t.time :time
       t.string :location
-      t.references :Application, null: false, foreign_key: true
+      t.references :application, null: false, foreign_key: true
 
       t.timestamps
     end

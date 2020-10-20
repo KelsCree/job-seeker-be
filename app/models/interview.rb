@@ -1,3 +1,3 @@
 class Interview < ApplicationRecord
-  belongs_to :Application
+  belongs_to :application
 end
