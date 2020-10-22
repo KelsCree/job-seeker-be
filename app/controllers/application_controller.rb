@@ -2,10 +2,14 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate
 
+  def logged_in?
+    !!authenticate
+  end
+
   def authenticate
     auth_header = request.headers['Authorization']
     if !auth_header
-      render json: { message: 'Not authorized to view this content' }, status: forbidden
+      render json: { message: 'Not authorized to view this content' }, status: :forbidden
     else
       token = auth_header.split(' ')[1]
       begin
@@ -13,10 +17,9 @@ class ApplicationController < ActionController::API
         payload = decoded_token.first
         user_id = payload['user_id']
         @user = User.find(user_id)
-      rescue
+      rescue JWT::DecodeError
         render json: { message: 'Invalid JWT' }, status: :forbidden
       end
     end
   end
-
 end

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    render json: @user, include: [:applications, :reccomendations]
+    render json: { user: authenticate, applications: authenticate.applications, reccomendations: authenticate.reccomendations}
   end
 
   def show
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.save
       @token = JWT.encode({ user_id: @user.id }, Rails.application.secrets.secret_key_base[0])
-      render json: { token: @token, user: @user }, status: :ok
+      render json: { token: @token, applications: @user.applications, reccomendations: @user.reccomendations, user: @user }, status: :ok
     else
       render json: { errors: @user.errors.full_messages }
     end
@@ -31,9 +31,9 @@ class UsersController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       @token = JWT.encode({ user_id: @user.id }, Rails.application.secrets.secret_key_base[0])
-      render json: { token: @token, user: @user }, status: :ok
+      render json: { token: @token, applications: @user.applications, reccomendations: @user.reccomendations, user: @user }, status: :ok
     else
-      render json: { message: 'Invalid username or password. Try again!'}
+      render json: { errors: ['Invalid username or password. Try again!'] }
     end
   end
 
