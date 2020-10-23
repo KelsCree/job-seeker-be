@@ -11,6 +11,7 @@ Interview.destroy_all
 Application.destroy_all
 User.destroy_all
 
+
 user1 = User.create(name: 'Kelsey Creehan', email: 'kelsey123@kelsey.com', password: 'apple')
 
 application1 = Application.create(
@@ -58,3 +59,8 @@ interview2 = Interview.create(date: date2, time: '10:00 a.m.', location: 'Amazon
 interview3 = Interview.create(date: date3, time: '12:00p.m.', location: 'Uber Offices Downtown', application: application3)
 interview4 = Interview.create(date: date4, time: '8:00a.m.', location: 'Zoom', application: application1)
 interview5 = Interview.create(date: date1, time: '11:00a.m.', location: 'Skype', application: application4)
+
+rec1 = Reccomendation.create(name: 'Thomas Lilly', email: 'Tom@tom.com', number: '814-234-9124', relationship: 'College Professor', user: user1)
+rec2 = Reccomendation.create(name: 'Suzanne Fran', email: 'Sue@sue.com', number: '832-486-4167', relationship: 'Former Boss', user: user1)
+rec3 = Reccomendation.create(name: 'Kasey Kerr', email: 'Kasey@kerr.com', number: '908-192-1943', relationship: 'Mentor', user: user1)
+

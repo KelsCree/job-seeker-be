@@ -27,6 +27,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    @user.update(update_params)
+    render json: @user, include: [:applications, :reccomendations]
+  end
+
   def login
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
@@ -44,6 +50,16 @@ class UsersController < ApplicationController
       :name,
       :email,
       :password
+    )
+  end
+
+  def update_params
+    params.require(:user).permit(
+      :name,
+      :email,
+      :password,
+      :linkedin,
+      :resume
     )
   end
 

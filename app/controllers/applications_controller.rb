@@ -12,12 +12,14 @@ class ApplicationsController < ApplicationController
 
   def create
     @application = Application.create(
+      user_id: @user.id,
       company: params[:company],
       position: params[:position],
-      description: params[:description],
+      status: params[:status],
       url: params[:url],
-      user_id: @user.id
+      description: params[:description]
     )
+    render json: @application
   end
 
   def destroy
